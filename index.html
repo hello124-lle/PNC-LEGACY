@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PNC LEGACY Invitation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8e0f2; /* Soft pink background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 36px;
+      color: #e91e63; /* Nursing Pink */
+      margin-bottom: 20px;
+    }
+    .event-name {
+      font-size: 28px;
+      color: #4caf50; /* Nursing Green */
+      margin-bottom: 20px;
+    }
+    .question {
+      font-size: 24px;
+      color: #2c3e50;
+      margin: 20px 0;
+    }
+    .yes-btn, .no-btn {
+      background-color: #4caf50; /* Nursing Green */
+      color: white;
+      font-size: 20px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      margin: 10px;
+    }
+    .yes-btn:hover {
+      background-color: #388e3c;
+    }
+    .no-btn {
+      background-color: #e91e63; /* Nursing Pink */
+      color: white;
+      position: relative;
+      transition: all 0.2s ease-in-out;
+    }
+    .no-btn:hover {
+      background-color: #d81b60;
+    }
+    .sad-cat {
+      display: none;
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .message {
+      font-size: 20px;
+      color: #e91e63;
+      margin-top: 20px;
+    }
+    @keyframes moveButton {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-50px, 50px); }
+      50% { transform: translate(50px, -50px); }
+      75% { transform: translate(-50px, -100px); }
+      100% { transform: translate(100px, 0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>You're Invited to an Amazing Event!</h1>
+    <p class="event-name">PNC LEGACY - A Nursing Legacy Celebration</p>
+    <p class="question">Would you like to join us for this wonderful event?</p>
+    <button class="yes-btn" id="yesBtn">YES, I'LL JOIN!</button>
+    <button class="no-btn" id="noBtn">NO, I WON'T JOIN</button>
+    <img src="https://placekitten.com/400/300" alt="Sad Cat" class="sad-cat" id="sadCat">
+    <p class="message" id="message"></p>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const sadCat = document.getElementById("sadCat");
+    const message = document.getElementById("message");
+
+    // Function for when "YES" is clicked
+    yesBtn.addEventListener("click", function() {
+      alert("Great! You're officially invited to PNC LEGACY. See you there! 🎉");
+    });
+
+    // Function to make the "No" button chase after clicks
+    let noClickCount = 0;
+    function moveNoButton() {
+      noClickCount++;
+
+      // After the first click, make the "No" button move around
+      if (noClickCount > 0) {
+        let randomX = Math.floor(Math.random() * 200) - 100; // Random X position
+        let randomY = Math.floor(Math.random() * 200) - 100; // Random Y position
+
+        noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        noBtn.style.transition = "transform 0.3s ease-in-out";
+
+        if (noClickCount > 4) {
+          noBtn.disabled = true; // Disable button after several tries
+          noBtn.style.display = "none"; // Hide the "No" button after it becomes impossible to click
+          sadCat.style.display = "block"; // Show the sad cat image
+          message.innerText = "Please, student nurses need you!";
+        }
+      }
+    }
+
+    // Event listener for when "No" is clicked
+    noBtn.addEventListener("click", function() {
+      moveNoButton();
+    });
+  </script>
+</body>
+</html>
